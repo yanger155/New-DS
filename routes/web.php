@@ -12,8 +12,12 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index.index');
 });
 
+Route::get('login/login', 'LoginController@login')->name('login');
+Route::post('login/dologin', 'LoginController@dologin')->name('dologin');
 
+Route::get('regist/regist', 'RegistController@regist')->name('regist');
+Route::post('regist/doregist', 'RegistController@doregist')->name('doregist');
 
