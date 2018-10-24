@@ -14,4 +14,7 @@ class User extends Model
     //            ->orderBy('name', 'desc')
     //            ->take(10)
             //    ->get();
+
+    // 设置白名单，设置允许别填充的字段
+    protected $fillable = ['name','password','phone'];
 }

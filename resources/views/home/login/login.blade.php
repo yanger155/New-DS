@@ -39,15 +39,34 @@
 							<img src="/img/wx_cz.jpg" />
 						</div>
 						<div id="profile" class="tab-pane  active">
-							<form class="sui-form" action="{{route('dologin')}}" method="post">
-								@csrf
+							<form class="sui-form"  action="{{route('dologin')}}" method="post">
+							@csrf
+							@if($errors->any())
+								<ul>
+									@foreach($errors->all() as $e)
+									<li>{{$e}}</li>
+									@endforeach
+								</ul>
+							@endif
 								<div class="input-prepend">
 									<span class="add-on loginname"></span>
-									<input id="prependedInput" type="text" name="uname" placeholder="用户名/手机号" class="span2 input-xfat">
+									<input type="text" name="uname" placeholder="用户名/手机号" class="span2 input-xfat">
+									<!-- @if($errors->has('uname')) class="error" @endif -->
+									<!-- @if($errors->has('uname'))
+									<p class="error">
+										{{$errors->first('uname')}}
+									</p>
+									@endif -->
 								</div>
 								<div class="input-prepend">
 									<span class="add-on loginpwd"></span>
-									<input id="prependedInput" type="password" name="pwd" placeholder="请输入密码" class="span2 input-xfat">
+									<input type="password" name="password" placeholder="请输入密码" class="span2 input-xfat">
+									<!-- @if($errors->has('password')) class="error" @endif -->
+									<!-- @if($errors->has('password'))
+									<p class="error">
+										{{$errors->first('password')}}
+									</p>
+									@endif -->
 								</div>
 								<div class="setting">
 									<label class="checkbox inline">
@@ -57,7 +76,8 @@
 									<span class="forget">忘记密码？</span>
 								</div>
 								<div class="logined">
-									<a class="sui-btn btn-block btn-xlarge btn-danger" href="{{route('dologin')}}" >登&nbsp;&nbsp;录</a>
+									<input class="sui-btn btn-block btn-xlarge btn-danger" type="submit" value="登&nbsp;&nbsp;录">
+									<!-- <a  href="{{route('dologin')}}" >登&nbsp;&nbsp;录</a> -->
 								</div>
 							</form>
 							<div class="otherlogin">
@@ -94,11 +114,11 @@
 		</div>
 	</div>
 
-<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
-<script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
-<script type="text/javascript" src="js/pages/login.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery.easing/jquery.easing.min.js"></script>
+<script type="text/javascript" src="/js/plugins/sui/sui.min.js"></script>
+<script type="text/javascript" src="/js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
+<script type="text/javascript" src="/js/pages/login.js"></script>
 </body>
 
 </html>

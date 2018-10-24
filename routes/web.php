@@ -11,13 +11,22 @@
 |
 */
 
-Route::get('/', function () {
-    return view('index.index');
-});
+// Route::get('/', function () {
+//     return view('home.index.index');
+// });
 
-Route::get('login/login', 'LoginController@login')->name('login');
-Route::post('login/dologin', 'LoginController@dologin')->name('dologin');
+// 前台功能
+Route::get('/home','home\IndexController@index');
 
-Route::get('regist/regist', 'RegistController@regist')->name('regist');
-Route::post('regist/doregist', 'RegistController@doregist')->name('doregist');
+Route::get('login/login', 'Home\LoginController@login')->name('login');
+Route::post('login/dologin', 'Home\LoginController@dologin')->name('dologin');
 
+Route::get('regist/regist', 'Home\RegistController@regist')->name('regist');
+Route::post('regist/doregist', 'Home\RegistController@doregist')->name('doregist');
+
+// 发送短信验证码
+Route::get('/sendcode', 'Home\RegistController@sendcode')->name('ajax-send-code');
+
+
+
+// 后台功能

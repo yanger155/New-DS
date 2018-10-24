@@ -20,51 +20,59 @@
 		</div>
 		<!--register-->
 		<div class="registerArea">
-			<h3>注册新用户<span class="go">我有账号，去<a href="login.html" target="_blank">登陆</a></span></h3>
+			<h3>注册新用户<span class="go">我有账号，去<a href="{{route('login')}}" target="_blank">登陆</a></span></h3>
 			<div class="info">
-				<form class="sui-form form-horizontal">
+				<form class="sui-form form-horizontal" action="{{route('doregist')}}" method="post">
+					@csrf
+					@if($errors->any())
+						<ul>
+							@foreach($errors->all() as $e)
+							<li>{{$e}}</li>
+							@endforeach
+						</ul>
+					@endif
 					<div class="control-group">
 						<label class="control-label">用户名：</label>
 						<div class="controls">
-							<input type="text" placeholder="请输入你的用户名" class="input-xfat input-xlarge">
+							<input type="text" name="uname" placeholder="请输入你的用户名" class="input-xfat input-xlarge" value="{{old('uname')}}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">登录密码：</label>
 						<div class="controls">
-							<input type="password" placeholder="设置登录密码" class="input-xfat input-xlarge">
+							<input type="password" name="password" placeholder="设置登录密码" class="input-xfat input-xlarge" value="{{old('password')}}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">确认密码：</label>
 						<div class="controls">
-							<input type="password" placeholder="再次确认密码" class="input-xfat input-xlarge">
+							<input type="password" name="password_confirmation" placeholder="再次确认密码" class="input-xfat input-xlarge" value="{{old('password_confirmation')}}">
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label class="control-label">手机号：</label>
 						<div class="controls">
-							<input type="text" placeholder="请输入你的手机号" class="input-xfat input-xlarge">
+							<input type="text" name="phone" placeholder="请输入你的手机号" class="input-xfat input-xlarge" value="{{old('phone')}}">
 						</div>
 					</div>
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">短信验证码：</label>
 						<div class="controls">
-							<input type="text" placeholder="短信验证码" class="input-xfat input-xlarge">  <a href="#">获取短信验证码</a>
+							<input type="text" name="code" placeholder="短信验证码" class="input-xfat input-xlarge">  <a href="#" id="send">获取短信验证码</a>
 						</div>
 					</div>
 					
 					<div class="control-group">
 						<label for="inputPassword" class="control-label">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
 						<div class="controls">
-							<input name="m1" type="checkbox" value="2" checked=""><span>同意协议并注册《品优购用户协议》</span>
+						<input type="checkbox" name="agree"><span>同意协议并注册《品优购用户协议》</span>
 						</div>
 					</div>
 					<div class="control-group">
 						<label class="control-label"></label>
 						<div class="controls btn-reg">
-							<a class="sui-btn btn-block btn-xlarge btn-danger" href="home.html" target="_blank">完成注册</a>
+						<input class="sui-btn btn-block btn-xlarge btn-danger" type="submit" value="注&nbsp;&nbsp;册">
 						</div>
 					</div>
 				</form>
@@ -98,3 +106,27 @@
 </body>
 
 </html>
+<script>
+	$("#send").click(function(){
+		alert('aaa');
+		// 获取手机号码
+		var phone = $("input[name=phone]").val();
+		// 执行ajax发到服务器
+		$.ajax({
+			type:"GET",
+			url: "{{route('ajax-send-code')}}",
+			data:{phone:phone},
+			success:function(data){
+				$("#send").attr('disabled');
+			}
+
+		});
+	});
+
+
+
+
+
+
+
+</script>
