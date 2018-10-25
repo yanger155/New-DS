@@ -30,3 +30,10 @@ Route::get('/sendcode', 'Home\RegistController@sendcode')->name('ajax-send-code'
 
 
 // 后台功能
+Route::get('/admin','Admin\IndexController@index');
+// 嵌套页
+Route::get('/home','Admin\IndexController@home')->name('home');
+
+
+Route::get('/index','Admin\LoginController@login')->name('login');
+Route::post('/dologin','Admin\LoginController@dologin')->name('adminlogin');
