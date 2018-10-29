@@ -82,3 +82,13 @@ Route::post('/articles/insert','Admin\ArticlesController@insert');
 Route::get('/articles/edit{$id}','Admin\ArticlesController@edit');
 Route::post('/articles/update{$id}','Admin\ArticlesController@update');
 Route::get('/articles/delete{$id}','Admin\ArticlesController@delete');
+
+
+// resource 的用法
+Route::resource('test','TestController');
+// 名称 连接上方法名
+// $url = URL::route('test.index)
+// $url = URL::route('test.edit', array('id'=>1))
+
+
+
