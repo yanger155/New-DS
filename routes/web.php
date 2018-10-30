@@ -15,17 +15,26 @@
 //     return view('home.index.index');
 // });
 
+// resource 的用法
+// Route::resource('test','TestController');
+// 名称 连接上方法名
+// $url = URL::route('test.index)
+// $url = URL::route('test.edit', array('id'=>1))
+
+
+
 // 前台功能
 Route::get('/home','home\IndexController@index');
 
-Route::get('login/login', 'Home\LoginController@login')->name('login');
-Route::post('login/dologin', 'Home\LoginController@dologin')->name('dologin');
+    // 会员登录
+    Route::get('login/login', 'Home\LoginController@login')->name('Hlogin');
+    Route::post('login/dologin', 'Home\LoginController@dologin')->name('dologin');
+    // 会员注册
+    Route::get('regist/regist', 'Home\RegistController@regist')->name('regist');
+    Route::post('regist/doregist', 'Home\RegistController@doregist')->name('doregist');
 
-Route::get('regist/regist', 'Home\RegistController@regist')->name('regist');
-Route::post('regist/doregist', 'Home\RegistController@doregist')->name('doregist');
-
-// 发送短信验证码
-Route::get('/sendcode', 'Home\RegistController@sendcode')->name('ajax-send-code');
+    // 会员注册发送短信验证码
+    Route::get('/sendcode', 'Home\RegistController@sendcode')->name('ajax-send-code');
 
 
 // *************************************************************************
@@ -33,62 +42,61 @@ Route::get('/sendcode', 'Home\RegistController@sendcode')->name('ajax-send-code'
 // 后台功能
 Route::get('/admin','Admin\IndexController@index');
 // 嵌套页
-Route::get('/home','Admin\IndexController@home')->name('home');
+Route::get('/admin_home','Admin\IndexController@home')->name('home');
+
+    // 登录模块
+    Route::get('/index','Admin\LoginController@login')->name('login');
+    Route::post('/dologin','Admin\LoginController@dologin')->name('adminlogin');
 
 
-// 登录模块
-Route::get('/index','Admin\LoginController@login')->name('login');
-Route::post('/dologin','Admin\LoginController@dologin')->name('adminlogin');
+    // 权限模块
+        // 个人信息
+        // Route::get('/admin_info','Admin\AdminController@info')->name('info');
+        // 角色管理
+        Route::get('/admin_list','Admin\AdminController@list')->name('list');
+        // 权限管理
+        Route::get('/admin_privilege','Admin\AdminController@privilege')->name('privilege');
+        // 角色管理
+        Route::get('/admin_role','Admin\AdminController@role')->name('role');
+        // 用户管理
+        Route::get('/admin_admin','Admin\AdminController@admin')->name('admin');
+
+        // 有关权限的增删改查
+        Route::get('/privilege_add','Admin\AdminController@pri_add')->name('pri_add');
+        Route::post('/privilege_doadd','Admin\AdminController@pri_doadd')->name('pri_doadd');
+        Route::get('/privilege_del{$id}','Admin\AdminController@pri_delete')->name('privilege_del');
+        // Route::get('/privilege_edit{$id}','Admin\AdminController@edit')->name('privilege_edit');
+    
+
+    // 会员模块
+        // 会员列表（删除和修改）
+        Route::get('/member_list','Admin\MemberController@member_list');
+            // 编辑用户
+            Route::get('/member_list_add{id}','Admin\MemberController@member_list_add')->name('member_list_add');
+            Route::post('/member_list_doadd','Admin\MemberController@member_list_doadd');
+            // 删除用户
+            Route::get('/member_list_del{id}','Admin\MemberController@member_list_del')->name('member_list_del');
+            // 禁用会员
+            Route::get('/member_stop{id}','Admin\MemberController@member_stop')->name('member_stop');
+            // 解禁用户
+            Route::get('/member_recover{id}','Admin\MemberController@member_recover')->name('member_recover');
 
 
-// 权限模块
-// 个人信息I
-Route::get('/admin_info','Admin\AdminController@info')->name('info');
-// 角色管理
-Route::get('/admin_list','Admin\AdminController@list')->name('list');
-// 权限管理
-Route::get('/admin_privilege','Admin\AdminController@privilege')->name('privilege');
-// 角色管理
-Route::get('/admin_role','Admin\AdminController@role')->name('role');
-// 用户管理
-Route::get('/admin_admin','Admin\AdminController@admin')->name('admin');
+        // 等级管理
+        Route::get('/member_charge','Admin\MemberController@member_charge');
+        // 会员记录管理
+        Route::get('/member_record','Admin\MemberController@member_record');
+
+
+    // 商品模块
+        // 产品管理
+        Route::resource('goods_charge');
+        
 
 
 
 
 
-Route::get('/privilege_add','Admin\AdminController@pri_add')->name('pri_add');
-Route::post('/privilege_doadd','Admin\AdminController@pri_doadd')->name('pri_doadd');
-Route::get('/privilege_del{$id}','Admin\AdminController@pri_delete')->name('privilege_del');
-// Route::get('/privilege_edit{$id}','Admin\AdminController@edit')->name('privilege_edit');
-
-
-
-
-
-// 商品模块
-Route::get('/goods','Admin\GoodsController@index');
-Route::get('/goods/create','Admin\GoodsController@create');
-Route::post('/goods/insert','Admin\GoodsController@insert');
-Route::get('/goods/edit{$id}','Admin\GoodsController@edit');
-Route::post('/goods/update{$id}','Admin\GoodsController@update');
-Route::get('/goods/delete{$id}','Admin\GoodsController@delete');
-
-
-// 文章模块
-Route::get('/articles','Admin\ArticlesController@index');
-Route::get('/articles/create','Admin\ArticlesController@create');
-Route::post('/articles/insert','Admin\ArticlesController@insert');
-Route::get('/articles/edit{$id}','Admin\ArticlesController@edit');
-Route::post('/articles/update{$id}','Admin\ArticlesController@update');
-Route::get('/articles/delete{$id}','Admin\ArticlesController@delete');
-
-
-// resource 的用法
-Route::resource('test','TestController');
-// 名称 连接上方法名
-// $url = URL::route('test.index)
-// $url = URL::route('test.edit', array('id'=>1))
 
 
 

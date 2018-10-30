@@ -16,5 +16,5 @@ class User extends Model
             //    ->get();
 
     // 设置白名单，设置允许别填充的字段
-    protected $fillable = ['name','password','phone'];
+    protected $fillable = ['name','phone','created_at','sex','address','grade'];
 }

@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Home;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegistRequest;
+use Hash;
+use App\Models\User;
 
 class RegistController extends Controller
 {
@@ -42,7 +45,7 @@ class RegistController extends Controller
         // 保存到表中
         $user->save();
         // 注册完毕跳转到登录页
-        return redirect()->route('login');
+        return redirect()->route('Hlogin');
     }
 
     public function sendcode(Request $req)
