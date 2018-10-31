@@ -59,7 +59,7 @@
   </div>  
   </div>
 <!---->
- <iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO  SRC="product-category-add.html" class="page_right_style"></iframe>
+ <iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO  SRC="/category_add" class="page_right_style"></iframe>
  </div>
 </div>
 </body>

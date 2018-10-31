@@ -34,6 +34,9 @@ class MemberController extends Controller
 
     public function member_list_doadd(Request $req)
     {
+        $data = $req->all();
+        dd($data);
+        
         $id = $req->hidden;
         // echo $id;
         $user = User::where('id',$id)

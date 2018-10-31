@@ -51,7 +51,7 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
 
     // 权限模块
         // 个人信息
-        // Route::get('/admin_info','Admin\AdminController@info')->name('info');
+        Route::get('/admin_info','Admin\AdminController@info')->name('info');
         // 角色管理
         Route::get('/admin_list','Admin\AdminController@list')->name('list');
         // 权限管理
@@ -89,11 +89,19 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
 
 
     // 商品模块
-        // 产品管理
-        Route::resource('goods_charge');
-        
+        // 产品管理  增删改查
+        Route::resource('/goods_charge','Admin\GoodsController');
+        // 品牌管理
+        Route::resource('/brand_charge','Admin\BrandsController');
+        // 分类管理
+        Route::resource('/category_charge','Admin\CategorysController');
+            Route::get('/category_add','Admin\CategorysController@category_add');
+            
 
 
+// Route::get('/test',function(){
+//     return "hello";
+// });
 
 
 
