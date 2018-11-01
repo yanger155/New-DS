@@ -15,13 +15,14 @@ class CategorysController extends Controller
     
     public function index()
     {
+        // 查询所有的分类渲染到页面
         return view('Admin.goods.Category_Manage');
-
     }
 
     public function create()
     {
-
+        // 三级联动
+        return view('Admin.goods.category_add');
 
     }
 

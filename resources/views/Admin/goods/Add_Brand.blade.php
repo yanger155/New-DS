@@ -74,13 +74,13 @@
                             </div> -->
                         </li>
                         <li class=" clearfix"><label class="label_name">品牌描述：</label> 
-                        <textarea name="describe" id="desc" cols="" rows="" class="textarea" onkeyup="checkLength(this);"></textarea>
+                        <textarea name="describe" cols="" rows="" class="textarea" onkeyup="checkLength(this);"></textarea>
                         <span class="wordage">剩余字数：<span id="sy" style="color:Red;">500</span>字</span>
                         </li>
                                     
                         <li class=" clearfix"><label class="label_name"><i>*</i>显示状态：</label>
-                            <label><input name="checkbox" type="radio" class="ace" checked="checked"><span class="lbl">正常</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" class="ace" name="status"><span class="lbl">失效</span></label>
+                            <label><input name="status" type="radio" class="ace" checked="checked" value="正常"><span class="lbl">正常</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><input type="radio" class="ace" name="status" value="失效"><span class="lbl">失效</span></label>
                         </li>
                     </ul>
 

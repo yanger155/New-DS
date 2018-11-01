@@ -37,19 +37,32 @@
 <body>
     <div class="page-content clearfix">
         <div id="brand_style">
-            <div class="search_style">
-
-                <ul class="search_content clearfix">
-                    <li><label class="l_f">品牌名称</label><input name="" type="text" class="text_add" placeholder="输入品牌名称"
-                            style=" width:250px" /></li>
-                    <li><label class="l_f">添加时间</label><input class="inline laydate-icon" id="start" style=" margin-left:10px;"></li>
-                    <li><select name="" class="text_add">
-                            <option value="1">国内品牌</option>
-                            <option value="2">国外品牌</option>
-                        </select></li>
-                    <li style="width:90px;"><button type="button" class="btn_search"><i class="icon-search"></i>查询</button></li>
-                </ul>
-            </div>
+            <form action="/brand_search">
+                @csrf
+                <div class="search_style">
+                    <ul class="search_content clearfix">
+                        <li>
+                            <label class="l_f">关键字</label>
+                            <input name="keyword" type="text" class="text_add" placeholder="输入关键字" style=" width:250px" />
+                        </li>
+                        <!-- <li>
+                            <label class="l_f">加入时间</label>
+                            <input class="inline laydate-icon" id="start" style=" margin-left:10px;" name="start_at"> -->
+                            <!-- <input class="inline laydate-icon" id="start" style=" margin-left:10px;" name="end_at"> -->
+                        <!-- </li> -->
+                        <li>
+                            <input type="radio" name="status" value="正常">正常
+                            <input type="radio" name="status" value="失效">失效
+                        </li>
+                        <li style="width:90px;">
+                            <input type="submit" class="btn_search" value="查询">
+                            <!-- <button type="button" class="btn_search">
+                            <i class="icon-search"></i>查询
+                            </button> -->
+                        </li>
+                    </ul>
+                </div>
+            </form>
             <div class="border clearfix">
                 <span class="l_f">
                     <a href="/brand_charge/create" title="添加品牌" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加品牌</a>
@@ -72,6 +85,7 @@
                         <thead>
                             <tr>
                                 <th width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+                                <th width="50px">ID</th>
                                 <th width="50px">品牌名称</th>
                                 <th width="120px">品牌LOGO</th>
                                 <th width="120px">加入时间</th>
@@ -84,16 +98,18 @@
                             @foreach($data as $v)
                             <tr>
                                 <td width="25px"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+                                <td id="ID">{{$v->id}}</td>
                                 <td width="80px"><a href="/brand_charge/{{$v->id}}">{{$v->brand_name}}</a></td>
-                                <td><img src="{{$v->logo}}" width="130"/></td>
+                                <td><img src="{{URL::asset($v->logo)}}" width="130"/></td>
                                 <td width="50px">{{$v->created_at}}</td>
                                 <td><a href="javascript:ovid()" name="Brand_detailed.html" style="cursor:pointer" class="text-primary brond_name"
                                         onclick="generateOrders('561');" title="玉兰油OLAY">{{$v->status}}</a></td>
                                 <td>{{$v->describe}}</td>
                                 <td class="td-manage">
-                                    <a onClick="member_stop(this,'10001')" href="javascript:;" title="停用" class="btn btn-xs btn-danger">停用</a>
+                                    <!-- <a onClick="member_stop(this,'10001')" href="/brand_stop{{$v->id}}" title="停用" class="btn btn-xs btn-danger">停用</a>
+                                    <a onClick="member_stop(this,'10001')" href="/brand_stop{{$v->id}}" title="停用" class="btn btn-xs btn-danger"></a> -->
                                     <a title="编辑" href="/brand_charge/{{$v->id}}/edit" class="btn btn-xs btn-info"><i class="icon-edit bigger-120"></i></a>
-                                    <a title="删除" href="/brand_charge/{{$v->id}}" class="btn btn-xs btn-warning"><i class="icon-trash  bigger-120"></i></a>
+                                    <a title="删除" href="/brand_del{{$v->id}}" class="btn btn-xs btn-warning" onclick="return confirm('确定要删除吗?');"><i class="icon-trash  bigger-120"></i></a>
                                 </td>
                             </tr>
                             @endforeach
@@ -297,4 +313,23 @@
             myChart.setOption(option);
         }
     );
+
+    // function del(node){
+    //     $('#ID').text(),;
+    //     alert(id);
+    //     var url = node.href; //得到href的值
+       
+    //     $.ajax({
+    //         url:url,
+    //         type:'DELETE',
+    //         success:function(result){
+    //             // 判断result的结果
+    //             // if(result){
+                    
+    //             // }
+    //             alert(data);
+    //         }
+    //     })
+    // }
+
 </script>

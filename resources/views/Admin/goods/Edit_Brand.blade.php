@@ -30,20 +30,21 @@
 </head>
 
 <body>
-<form action="/brand_charge/" method="POST" enctype="multipart/form-data">
+<form method="post" action="/brand_charge/{{$data->id}}"  enctype="multipart/form-data">
     @csrf
+    {{method_field('PUT')}}
     <div class=" clearfix">
         <div id="add_brand" class="clearfix">
             <div class="left_add">
                 <div class="title_name">添加品牌</div>
            
                     <ul class="add_conent">
-                        <li class=" clearfix"><label class="label_name"><i>*</i>品牌名称：</label> <input name="" type="text"
-                                class="add_text" /></li>
-                        <li class=" clearfix"><label class="label_name"><i>*</i>品牌序号：</label> <input name="" type="text"
-                                class="add_text" style="width:80px" /></li>
+                        <li class=" clearfix"><label class="label_name"><i>*</i>品牌名称：</label> <input name="brand_name" type="text" class="add_text" value="{{$data->brand_name}}"/>
+                        </li>
+                    
                         <li class=" clearfix"><label class="label_name">品牌图片：</label>
-                            <div class="demo l_f">
+                        <input type="file" name="logo">
+                            <!-- <div class="demo l_f">
                                 <div class="logobox">
                                     <div class="resizebox"><img src="/images/image.png" width="100px" alt="" height="100px" /></div>
                                 </div>
@@ -62,16 +63,18 @@
                             <div class="prompt">
                                 <p>图片大小<b>120px*60px</b>图片大小小于5MB,</p>
                                 <p>支持.jpg;.gif;.png;.jpeg格式的图片</p>
-                            </div>
+                            </div> -->
                         </li>
-                        <li class=" clearfix"><label class="label_name"><i>*</i>所属地区：</label> <input name="" type="text"
-                                class="add_text" style="width:120px" /></li>
-                        <li class=" clearfix"><label class="label_name">品牌描述：</label> <textarea name="" cols="" rows=""
-                                class="textarea" onkeyup="checkLength(this);"></textarea><span class="wordage">剩余字数：<span
-                                    id="sy" style="color:Red;">500</span>字</span></li>
+                        <li class=" clearfix"><label class="label_name">品牌描述：</label> 
+                        <textarea name="describe" id="desc" cols="" rows="" class="textarea" onkeyup="checkLength(this);">{{$data->describe}}</textarea>
+                        <span class="wordage">剩余字数：<span id="sy" style="color:Red;">500</span>字</span>
+                        </li>
+                                    
                         <li class=" clearfix"><label class="label_name"><i>*</i>显示状态：</label>
-                            <label><input name="checkbox" type="radio" class="ace" checked="checked"><span class="lbl">显示</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <label><input type="radio" class="ace" name="checkbox"><span class="lbl">不显示</span></label>
+                            <label><input name="status" type="radio" class="ace" value="正常" @if($data->status == "正常") checked @endif)><span class="lbl">正常</span></label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <label><input type="radio" class="ace" name="status" value="失效" @if($data->status == "失效") checked @endif><span class="lbl">失效</span></label>
+
+                            <!-- <input type="hidden" name="_method" value="PUT（PATCH、DELETE）"> -->
                         </li>
                     </ul>
             </div>

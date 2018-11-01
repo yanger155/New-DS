@@ -32,6 +32,7 @@ class MemberController extends Controller
         return view('Admin.member.user_list_add',['data'=>$data]);
     }
 
+    // 更新用户
     public function member_list_doadd(Request $req)
     {
         $data = $req->all();

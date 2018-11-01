@@ -2,150 +2,179 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="renderer" content="webkit|ie-comp|ie-stand">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta http-equiv="Cache-Control" content="no-siteapp" />
         <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="css/style.css"/>       
         <link href="assets/css/codemirror.css" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/ace.min.css" />
-        <link rel="stylesheet" href="Widget/zTree/css/zTreeStyle/zTreeStyle.css" type="text/css">
-        <link rel="stylesheet" href="assets/css/font-awesome.min.css" />
-        
-		<!--[if IE 7]>
-		  <link rel="stylesheet" href="assets/css/font-awesome-ie7.min.css" />
-		<![endif]-->
+        <link rel="stylesheet" href="font/css/font-awesome.min.css" />
         <!--[if lte IE 8]>
 		  <link rel="stylesheet" href="assets/css/ace-ie.min.css" />
 		<![endif]-->
-			<script src="assets/js/jquery.min.js"></script>
-		<!-- <![endif]-->
-		<!--[if IE]>
-       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <![endif]-->
-		<!--[if !IE]> -->
-		<script type="text/javascript">
-			window.jQuery || document.write("<script src='assets/js/jquery-2.0.3.min.js'>"+"<"+"/script>");
-		</script>
-		<!-- <![endif]-->
-		<!--[if IE]>
-<script type="text/javascript">
- window.jQuery || document.write("<script src='assets/js/jquery-1.10.2.min.js'>"+"<"+"/script>");
-</script>
-<![endif]-->
-        <script src="assets/js/ace-elements.min.js"></script>
-		<script src="assets/js/ace.min.js"></script>
+		<script src="js/jquery-1.9.1.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-		<script src="assets/js/typeahead-bs2.min.js"></script>
-        <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
-        <script src="js/lrtk.js" type="text/javascript" ></script>
-<title>分类管理</title>
+		<script src="assets/js/typeahead-bs2.min.js"></script>           	
+		<script src="assets/js/jquery.dataTables.min.js"></script>
+		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
+        <script src="assets/layer/layer.js" type="text/javascript" ></script>          
+        <script src="assets/laydate/laydate.js" type="text/javascript"></script>
+<title>管理权限</title>
 </head>
 
 <body>
-<div class=" clearfix">
- <div id="category">
-    <div id="scrollsidebar" class="left_Treeview">
-    <div class="show_btn" id="rightArrow"><span></span></div>
-    <div class="widget-box side_content" >
-    <div class="side_title"><a title="隐藏" class="close_btn"><span></span></a></div>
-     <div class="side_list">
-      <div class="widget-header header-color-green2">
-          <h4 class="lighter smaller">产品类型列表</h4>
-      </div>
-      <div class="widget-body">
-          <div class="widget-main padding-8">
-              <div  id="treeDemo" class="ztree"></div>
-          </div>
-  </div>
-  </div>
-  </div>  
-  </div>
-<!---->
- <iframe ID="testIframe" Name="testIframe" FRAMEBORDER=0 SCROLLING=AUTO  SRC="/category_add" class="page_right_style"></iframe>
+ <div class="margin clearfix">
+   <div class="border clearfix">
+       <span class="l_f">
+        <a href="/category_charge/create" id="Competence_add" class="btn btn-warning" title="添加分类"><i class="fa fa-plus"></i> 添加分类</a>
+        <a href="javascript:ovid()" class="btn btn-danger"><i class="fa fa-trash"></i> 批量删除</a>
+       </span>
+       <span class="r_f">共：<b>5</b>类</span>
+     </div>
+     <div class="compete_list">
+       <table id="sample-table-1" class="table table-striped table-bordered table-hover">
+		 <thead>
+			<tr>
+			  <th class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
+			  <th>编号</th>
+			  <th>权限名称</th>
+              <th>权限路径</th>
+			  <!-- <th class="hidden-480"></th>       -->
+			  <th class="hidden-480">操作</th>
+             </tr>
+		    </thead>
+             <tbody>
+		
+			  <tr>
+				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+				<td></td>
+				<td></td>
+				<td class="hidden-480"></td>
+			
+				<td>
+                 <a title="编辑" onclick="Competence_modify('560')" href=""  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120">编辑</i></a>        
+                 <a title="删除" href=""  onclick="Competence_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120">删除</i></a>
+				</td>
+			   </tr>
+
+               <!-- <tr>
+				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+				<td>普通管理员</td>
+				<td>3</td>
+				<td class="hidden-480">admin123 , 张小泉 ,克雷鲍</td>
+				<td>拥有网站的系统大部分使用权限，没有权限管理功能。</td>
+				<td>
+                 <a title="编辑" onclick="Competence_modify('561')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a>        
+                 <a title="删除" href="javascript:;"  onclick="Competence_del(this,'2')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
+				</td>
+			   </tr>	
+               <tr>
+				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
+				<td>编辑管理员</td>
+				<td>5</td>
+				<td class="hidden-480">admin345,stysty,adminstyle,admin45678,admin123455</td>
+				<td>拥有部分权限，主要进行编辑功能，无边界订单功能，权限分配功能。</td>
+				<td>
+                 <a title="编辑" onclick="Competence_modify('562')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a>        
+                 <a title="删除" href="javascript:;"  onclick="Competence_del(this,'3')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
+				</td>
+			   </tr>												 -->
+		      </tbody>
+	        </table>
+     </div>
  </div>
-</div>
+ <!--添加权限样式-->
+ <!-- <div id="Competence_add_style" style="display:none">
+   <div class="Competence_add_style">
+     <div class="form-group"><label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 权限名称 </label>
+       <div class="col-sm-9"><input type="text" id="form-field-1" placeholder=""  name="权限名称" class="col-xs-10 col-sm-5"></div>
+	</div>
+     <div class="form-group"><label class="col-sm-2 control-label no-padding-right" for="form-field-1"> 权限说明 </label>
+       <div class="col-sm-9"><textarea name="权限说明" class="form-control" id="form_textarea" placeholder="" onkeyup="checkLength(this);"></textarea><span class="wordage">剩余字数：<span id="sy" style="color:Red;">200</span>字</span></div>
+	</div>
+   </div> 
+  </div>-->
 </body>
 </html>
-<script type="text/javascript"> 
-$(function() { 
-	$("#category").fix({
-		float : 'left',
-		//minStatue : true,
-		skin : 'green',	
-		durationTime :false
-	});
-});
-</script>
 <script type="text/javascript">
-//初始化宽度、高度  
- $(".widget-box").height($(window).height()); 
- $(".page_right_style").width($(window).width()-220);
-  //当文档窗口发生改变时 触发  
-    $(window).resize(function(){
-	$(".widget-box").height($(window).height());
-	 $(".page_right_style").width($(window).width()-220);
-	})
- 
-/**************/
-var setting = {
-	view: {
-		dblClickExpand: false,
-		showLine: false,
-		selectedMulti: false
-	},
-	data: {
-		simpleData: {
-			enable:true,
-			idKey: "id",
-			pIdKey: "pId",
-			rootPId: ""
+/*添加权限*/
+/* $('#Competence_add').on('click', function(){	 
+	 layer.open({
+        type: 1,
+        title: '添加权限',
+		maxmin: true, 
+		shadeClose: false,
+        area : ['800px' , ''],
+        content:$('#Competence_add_style'),
+		btn:['提交','取消'],
+		yes:function(index,layero){	
+		 var num=0;
+		 var str="";
+     $(".col-sm-9 input[type$='text'],#form_textarea").each(function(n){
+          if($(this).val()=="")
+          {
+               
+			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
+                title: '提示框',				
+				icon:0,								
+          }); 
+		    num++;
+            return false;            
+          } 
+		 });
+		  if(num>0){  return false;}	 	
+          else{
+			  layer.alert('添加成功！',{
+               title: '提示框',				
+			icon:1,		
+			  });
+			   layer.close(index);	
+		  }		  		     				
 		}
-	},
-	callback: {
-		beforeClick: function(treeId, treeNode) {
-			var zTree = $.fn.zTree.getZTreeObj("tree");
-			if (treeNode.isParent) {
-				zTree.expandNode(treeNode);
-				return false;
-			} else {
-				demoIframe.attr("src",treeNode.file + ".html");
-				return true;
-			}
-		}
+    });			 
+ });*/
+ /*权限-删除*/
+function Competence_del(obj,id){
+	layer.confirm('确认要删除吗？',function(index){
+		$(obj).parents("tr").remove();
+		layer.msg('已删除!',{icon:1,time:1000});
+	});
+}
+/*修改权限*/
+function Competence_modify(id){
+		window.location.href ="Competence.html?="+id;
+};	
+/*字数限制*/
+function checkLength(which) {
+	var maxChars = 200; //
+	if(which.value.length > maxChars){
+	   layer.open({
+	   icon:2,
+	   title:'提示框',
+	   content:'您出入的字数超多限制!',	
+    });
+		// 超过限制的字数了就将 文本框中的内容按规定的字数 截取
+		which.value = which.value.substring(0,maxChars);
+		return false;
+	}else{
+		var curr = maxChars - which.value.length; //250 减去 当前输入的
+		document.getElementById("sy").innerHTML = curr.toString();
+		return true;
 	}
 };
-
-var zNodes =[
-	{ id:1, pId:0, name:"商城分类列表", open:true},
-	{ id:11, pId:1, name:"蔬菜水果"},
-	{ id:111, pId:11, name:"蔬菜"},
-	{ id:112, pId:11, name:"苹果"},
-	{ id:113, pId:11, name:"大蒜"},
-	{ id:114, pId:11, name:"白菜"},
-	{ id:115, pId:11, name:"青菜"},
-	{ id:12, pId:1, name:"手机数码"},
-	{ id:121, pId:12, name:"手机 "},
-	{ id:122, pId:12, name:"照相机 "},
-	{ id:13, pId:1, name:"电脑配件"},
-	{ id:131, pId:13, name:"手机 "},
-	{ id:122, pId:13, name:"照相机 "},
-	{ id:14, pId:1, name:"服装鞋帽"},
-	{ id:141, pId:14, name:"手机 "},
-	{ id:42, pId:14, name:"照相机 "},
-];
-		
-var code;
-		
-function showCode(str) {
-	if (!code) code = $("#code");
-	code.empty();
-	code.append("<li>"+str+"</li>");
-}
-		
-$(document).ready(function(){
-	var t = $("#treeDemo");
-	t = $.fn.zTree.init(t, setting, zNodes);
-	demoIframe = $("#testIframe");
-	demoIframe.bind("load", loadReady);
-	var zTree = $.fn.zTree.getZTreeObj("tree");
-	zTree.selectNode(zTree.getNodeByParam("id",'11'));
-});	
+//面包屑返回值
+var index = parent.layer.getFrameIndex(window.name);
+parent.layer.iframeAuto(index);
+$('.Order_form ,#Competence_add').on('click', function(){
+	var cname = $(this).attr("title");
+	var cnames = parent.$('.Current_page').html();
+	var herf = parent.$("#iframe").attr("src");
+    parent.$('#parentIframe span').html(cname);
+	parent.$('#parentIframe').css("display","inline-block");
+    parent.$('.Current_page').attr("name",herf).css({"color":"#4c8fbd","cursor":"pointer"});
+	//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+">" + cnames + "</a>");
+    parent.layer.close(index);
+	
+});
 </script>

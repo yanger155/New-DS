@@ -93,8 +93,14 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
         Route::resource('/goods_charge','Admin\GoodsController');
         // 品牌管理
         Route::resource('/brand_charge','Admin\BrandsController');
+            // 品牌删除（独立于资源路由）
+            Route::get('/brand_del{id}','Admin\BrandsController@brand_del'); 
+            Route::get('/brand_search','Admin\BrandsController@brand_search'); 
+            // Route::get('/brand_stop{id}','Admin\BrandsController@brand_stop'); 
+                      
         // 分类管理
         Route::resource('/category_charge','Admin\CategorysController');
+            // 添加分类嵌套页
             Route::get('/category_add','Admin\CategorysController@category_add');
             
 
