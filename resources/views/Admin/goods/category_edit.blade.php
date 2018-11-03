@@ -27,8 +27,9 @@
 
 <body>
 	<div class="Competence_add_style clearfix">
-		<form action="/category_charge" method="post">
+		<form action="/category_charge/{{$data1->id}}" method="post">
 			@csrf
+			{{method_field('PUT')}}
 			<div class="left_Competence_add">
 				<div class="title_name">添加分类</div>
 
@@ -36,7 +37,7 @@
 					<div class="form-group">
 						<label class="col-sm-2 control-label no-padding-right" for="form-field-1">分类名称</label>
 						<div class="col-sm-9">
-							<input type="text" id="form-field-1" placeholder="" name="category_name" class="col-xs-10 col-sm-5" value="">
+							<input type="text" id="form-field-1" placeholder="" name="category_name" class="col-xs-10 col-sm-5" value="{{$data1->category_name}}">
 						</div>
 					</div>
 
@@ -45,7 +46,7 @@
 						<div class="col-sm-9">
 							<select name="cat1">
 								<option value="">请选择</option>
-								@foreach($data as $v)
+								@foreach($data2 as $v)
 								<option value="{{$v->id}}">{{$v->category_name}}</option>
 								@endforeach
 							</select>

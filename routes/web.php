@@ -102,6 +102,10 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
         Route::resource('/category_charge','Admin\CategorysController');
             // 添加分类嵌套页
             Route::get('/category_add','Admin\CategorysController@category_add');
+            // ajax获取子分类
+            Route::get('/ajax_getcat/{parent_id}','Admin\CategorysController@ajax_getcat');
+
+
             
 
 

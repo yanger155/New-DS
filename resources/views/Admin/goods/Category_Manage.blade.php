@@ -20,7 +20,7 @@
 		<script src="assets/js/jquery.dataTables.bootstrap.js"></script>
         <script src="assets/layer/layer.js" type="text/javascript" ></script>          
         <script src="assets/laydate/laydate.js" type="text/javascript"></script>
-<title>管理权限</title>
+<title>商品分类</title>
 </head>
 
 <body>
@@ -38,26 +38,28 @@
 			<tr>
 			  <th class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></th>
 			  <th>编号</th>
-			  <th>权限名称</th>
-              <th>权限路径</th>
+			  <th>分类名称</th>
+              <th>上级ID</th>
+			  <th>分类路径</th>
 			  <!-- <th class="hidden-480"></th>       -->
 			  <th class="hidden-480">操作</th>
              </tr>
 		    </thead>
              <tbody>
-		
+			@foreach($data as $v)
 			  <tr>
 				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-				<td></td>
-				<td></td>
-				<td class="hidden-480"></td>
-			
+				<td>{{$v['id']}}</td>
+				<td>{!!str_repeat('&nbsp;', 8*(count(explode('-',$v['category_path']))-2)) . $v['category_name']!!}</td>
+				<td class="hidden-480">{{$v['parent_id']}}</td>
+				<td>{{$v['category_path']}}</td>
+
 				<td>
-                 <a title="编辑" onclick="Competence_modify('560')" href=""  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120">编辑</i></a>        
+                 <a title="编辑" onclick="Competence_modify('560')" href="/category_charge/{{$v['id']}}/edit"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120">编辑</i></a>        
                  <a title="删除" href=""  onclick="Competence_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120">删除</i></a>
 				</td>
 			   </tr>
-
+			@endforeach
                <!-- <tr>
 				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
 				<td>普通管理员</td>
