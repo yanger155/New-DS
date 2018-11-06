@@ -91,6 +91,8 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
     // 商品模块
         // 产品管理  增删改查
         Route::resource('/goods_charge','Admin\GoodsController');
+            // 商品删除（独立于资源路由）
+            Route::get('/goods_del{id}','Admin\GoodsController@goods_del');
 
         // 品牌管理
         Route::resource('/brand_charge','Admin\BrandsController');
@@ -104,7 +106,7 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
             // 分类列表中ajax获取子分类
             Route::get('/ajax_getcat/{parent_id}','Admin\CategorysController@ajax_getcat');
             // 分类删除（独立于资源路由）
-            Route::get('/category_del{parent_id}','Admin\CategorysController@category_del');
+            Route::get('/category_del{id}','Admin\CategorysController@category_del');
 
 
 
