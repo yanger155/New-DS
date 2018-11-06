@@ -56,34 +56,15 @@
 
 				<td>
                  <a title="编辑" onclick="Competence_modify('560')" href="/category_charge/{{$v['id']}}/edit"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120">编辑</i></a>        
-                 <a title="删除" href=""  onclick="Competence_del(this,'1')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120">删除</i></a>
+                 <a title="删除" onclick="return confirm('确定要删除吗？该分类下可能存在子分类哟，如果删除，子分类也会被删除！~');" href="/category_del{{$v['id']}}" id="del" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120">删除</i></a>
+				 <!-- <a  id="/category_charge/" name="{{$v['id']}}" onclick="del(this);return false;" class="btn btn-xs btn-warning fa fa-edit bigger-120" >删除</a> -->
 				</td>
 			   </tr>
-			@endforeach
-               <!-- <tr>
-				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-				<td>普通管理员</td>
-				<td>3</td>
-				<td class="hidden-480">admin123 , 张小泉 ,克雷鲍</td>
-				<td>拥有网站的系统大部分使用权限，没有权限管理功能。</td>
-				<td>
-                 <a title="编辑" onclick="Competence_modify('561')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a>        
-                 <a title="删除" href="javascript:;"  onclick="Competence_del(this,'2')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-				</td>
-			   </tr>	
-               <tr>
-				<td class="center"><label><input type="checkbox" class="ace"><span class="lbl"></span></label></td>
-				<td>编辑管理员</td>
-				<td>5</td>
-				<td class="hidden-480">admin345,stysty,adminstyle,admin45678,admin123455</td>
-				<td>拥有部分权限，主要进行编辑功能，无边界订单功能，权限分配功能。</td>
-				<td>
-                 <a title="编辑" onclick="Competence_modify('562')" href="javascript:;"  class="btn btn-xs btn-info" ><i class="fa fa-edit bigger-120"></i></a>        
-                 <a title="删除" href="javascript:;"  onclick="Competence_del(this,'3')" class="btn btn-xs btn-warning" ><i class="fa fa-trash  bigger-120"></i></a>
-				</td>
-			   </tr>												 -->
+			@endforeach			
 		      </tbody>
 	        </table>
+			<a href="#">上一页</a>
+			<a href="#">下一页</a>
      </div>
  </div>
  <!--添加权限样式-->
@@ -99,84 +80,58 @@
   </div>-->
 </body>
 </html>
-<script type="text/javascript">
-/*添加权限*/
-/* $('#Competence_add').on('click', function(){	 
-	 layer.open({
-        type: 1,
-        title: '添加权限',
-		maxmin: true, 
-		shadeClose: false,
-        area : ['800px' , ''],
-        content:$('#Competence_add_style'),
-		btn:['提交','取消'],
-		yes:function(index,layero){	
-		 var num=0;
-		 var str="";
-     $(".col-sm-9 input[type$='text'],#form_textarea").each(function(n){
-          if($(this).val()=="")
-          {
-               
-			   layer.alert(str+=""+$(this).attr("name")+"不能为空！\r\n",{
-                title: '提示框',				
-				icon:0,								
-          }); 
-		    num++;
-            return false;            
-          } 
-		 });
-		  if(num>0){  return false;}	 	
-          else{
-			  layer.alert('添加成功！',{
-               title: '提示框',				
-			icon:1,		
-			  });
-			   layer.close(index);	
-		  }		  		     				
-		}
-    });			 
- });*/
- /*权限-删除*/
-function Competence_del(obj,id){
-	layer.confirm('确认要删除吗？',function(index){
-		$(obj).parents("tr").remove();
-		layer.msg('已删除!',{icon:1,time:1000});
-	});
-}
-/*修改权限*/
-function Competence_modify(id){
-		window.location.href ="Competence.html?="+id;
-};	
-/*字数限制*/
-function checkLength(which) {
-	var maxChars = 200; //
-	if(which.value.length > maxChars){
-	   layer.open({
-	   icon:2,
-	   title:'提示框',
-	   content:'您出入的字数超多限制!',	
-    });
-		// 超过限制的字数了就将 文本框中的内容按规定的字数 截取
-		which.value = which.value.substring(0,maxChars);
-		return false;
-	}else{
-		var curr = maxChars - which.value.length; //250 减去 当前输入的
-		document.getElementById("sy").innerHTML = curr.toString();
-		return true;
-	}
-};
-//面包屑返回值
-var index = parent.layer.getFrameIndex(window.name);
-parent.layer.iframeAuto(index);
-$('.Order_form ,#Competence_add').on('click', function(){
-	var cname = $(this).attr("title");
-	var cnames = parent.$('.Current_page').html();
-	var herf = parent.$("#iframe").attr("src");
-    parent.$('#parentIframe span').html(cname);
-	parent.$('#parentIframe').css("display","inline-block");
-    parent.$('.Current_page').attr("name",herf).css({"color":"#4c8fbd","cursor":"pointer"});
-	//parent.$('.Current_page').html("<a href='javascript:void(0)' name="+herf+">" + cnames + "</a>");
-    parent.layer.close(index);
-	
-});
+<script src="/js/jquery.min.js"></script>
+<script>
+
+// function del(node) {
+//     var url = node.id;/*得到id的值*/
+// 	var id = node.name;
+// 	// alert(id);
+// 	confirm_ = confirm('确定要删除吗?');
+// 	if(confirm_){
+// 		// $.ajaxSetup({
+// 		// 	headers: {
+// 		// 		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+// 		// 	}
+// 		// });
+// 		$.ajax({
+
+// 			// console.log(url);
+// 			url:url,/*url也可以是json之类的文件等等*/
+// 			type:'DELETE',/*DELETE、POST */
+// 			data:{
+// 				'_token':'{{@csrf_field}}'
+// 				'id':id
+// 			},
+// 			success:function (result) {
+				
+// 			}
+// 		})
+// 	}
+// };
+
+
+
+
+	// $('a').click(function(){
+	// 	// 获取url
+	// 	var url = $(this).attr('href');
+	// 	// alert(url);
+	// 	// 发一个提示框，确认删除吗？
+	// 	confirm_ = confirm('This action will delete current order! Are you sure?');
+	// 	if(confirm_){
+	// 		$.ajax({
+	// 			type:"DELETE",
+	// 			url:url,
+	// 			dataType:"json",
+	// 			headers:{
+	// 				"Content-Type": "application/json",
+	// 				"X-HTTP-Method-Override": "DELETE"
+	// 			}
+	// 			success:function(data){
+					
+	// 			}
+	// 		});
+	// 	}
+	// });
 </script>

@@ -91,19 +91,21 @@ Route::get('/admin_home','Admin\IndexController@home')->name('home');
     // 商品模块
         // 产品管理  增删改查
         Route::resource('/goods_charge','Admin\GoodsController');
+
         // 品牌管理
         Route::resource('/brand_charge','Admin\BrandsController');
             // 品牌删除（独立于资源路由）
             Route::get('/brand_del{id}','Admin\BrandsController@brand_del'); 
+            // 搜索功能
             Route::get('/brand_search','Admin\BrandsController@brand_search'); 
-            // Route::get('/brand_stop{id}','Admin\BrandsController@brand_stop'); 
                       
         // 分类管理
         Route::resource('/category_charge','Admin\CategorysController');
-            // 添加分类嵌套页
-            Route::get('/category_add','Admin\CategorysController@category_add');
-            // ajax获取子分类
+            // 分类列表中ajax获取子分类
             Route::get('/ajax_getcat/{parent_id}','Admin\CategorysController@ajax_getcat');
+            // 分类删除（独立于资源路由）
+            Route::get('/category_del{parent_id}','Admin\CategorysController@category_del');
+
 
 
             

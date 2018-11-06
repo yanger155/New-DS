@@ -9,12 +9,6 @@ use DB;
 
 class CategorysController extends Controller
 {
-    // 添加分类嵌套页
-    public function category_add()
-    {
-        return view('Admin.goods.product-category-add');
-    }
-
 
     // ajax获取子分类
     public function ajax_getcat($parent_id)
@@ -100,7 +94,7 @@ class CategorysController extends Controller
         $category = new Categorys;
         // $data1 = Categorys::where('id',$id)->first();
         $data1 = DB::table('goods_category')->where('id',$id)->first();
-        dd($data1);
+        // dd($data1);
         // $data2 = Categorys::where('parent_id','=','0')->get();
         $data2 = DB::table('goods_category')->where('parent_id','=','0')->get();
         // dd($data2);
@@ -111,22 +105,56 @@ class CategorysController extends Controller
 
     }
 
-    public function update($id)
+    public function update(Request $req,$id)
     {
-        echo "agnldgn";
+        // echo "agnldgn";
+        $parent_id = '';
+        $path = '';
+
+        if($req->cat1 == null && $req->cat2 == null && $req->cat3 == null)
+        {
+            $parent_id = 0;
+            // $cat_name = $_POST['cat_name'];
+            $path = '-';
+        }
+        else if($req->cat2 == null && $req->cat3 == null)
+        {
+            $parent_id = $req->cat1;
+            // $cat_name = $_POST['cat_name'];
+            $path = '-'.$parent_id.'-';
+        }
+        else if($req->cat3 == null)
+        {
+            $parent_id = $req->cat2;
+            // $cat_name = $_POST['cat_name'];
+            $path = '-'.$req->cat1.'-'.$req->cat2.'-';
+        }
+        else
+        {
+            $parent_id = $req->cat3;
+            // $cat_name = $_POST['catid3']
+            $path = '-'.$req->cat1.'-'.$req->cat2.'-'.$req->cat3.'-';
+        }
+
+        $category = Categorys::updateOrCreate(
+            ['id' => $id],
+            ['category_name' => $req->category_name ],
+            ['parent_id' => $parent_id ],
+            ['category_path' => $path ]
+        );
+        return redirect('/category_charge');
 
     }
 
-    public function destroy($id)
+    public function category_del($id)
     {
-
-    }
-
-
-    public function show($id)
-    {
-
-
+        // dd("Aaa");
+        $data1 = DB::table('goods_category')
+                    ->where('id',$id)
+                    ->orwhere('parent_id','=',$id)
+                    // ->get()
+                    ->delete();
+        return redirect('/category_charge');
     }
 
 }

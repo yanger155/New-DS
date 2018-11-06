@@ -30,7 +30,7 @@
         <script src="assets/laydate/laydate.js" type="text/javascript"></script>
         <script type="text/javascript" src="Widget/zTree/js/jquery.ztree.all-3.5.min.js"></script> 
         <script src="js/lrtk.js" type="text/javascript" ></script>
-<title>产品列表</title>
+<title>商品列表</title>
 </head>
 <body>
 <div class=" page-content clearfix">
@@ -45,7 +45,7 @@
     </div>
      <div class="border clearfix">
        <span class="l_f">
-        <a href="picture-add.html" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
+        <a href="/goods_charge/create" title="添加商品" class="btn btn-warning Order_form"><i class="icon-plus"></i>添加商品</a>
         <a href="javascript:ovid()" class="btn btn-danger"><i class="icon-trash"></i>批量删除</a>
        </span>
        <span class="r_f">共：<b>2334</b>件商品</span>
