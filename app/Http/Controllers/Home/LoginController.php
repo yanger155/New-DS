@@ -33,7 +33,7 @@ class LoginController extends Controller
         // 获取一条数据
         // $user = DB::table('users')->first();
         // dd($user);
-
+        // 去数据库里查询用户
         $user = User::where('name',$req->uname)->first();
         if($user)
         {
@@ -41,7 +41,7 @@ class LoginController extends Controller
             {
                 session([
                     'id' => $user->id,
-                    'username' => $user->username,
+                    'username' => $user->name,
                 ]);
                 // 跳转到一个命名的路由
                 return redirect('/home');

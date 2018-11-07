@@ -139,10 +139,17 @@ class GoodsController extends Controller
 
     public function goods_del($id)
     {
-        // 删除是个大问题
+        // 删除属性
         DB::table('goods_attribute')->where('goods_id','=',$id)->delete();
+        // 删除图片
+        $image = DB::table('goods_image')->where('goods_id','=',$id)->get();
+        foreach ($image as $v)
+        {
+            // 删除本地保存的图片
+            @unlink(base_path('public/'.$v->url));
+        }
         DB::table('goods_image')->where('goods_id','=',$id)->delete();
-        // 删除本地保存的图片
+        // 删除商品
         DB::table('goods')->where('id','=',$id)->delete();
         return redirect('/goods_charge');
     }

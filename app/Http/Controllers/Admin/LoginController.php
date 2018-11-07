@@ -28,6 +28,7 @@ class LoginController extends Controller
                     'id' => $admin->id,
                     'name' => $admin->name,
                 ]);
+
                 return redirect('/admin');
             }
             return back()->withInput()->withErrors('密码不正确');

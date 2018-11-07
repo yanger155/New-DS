@@ -24,7 +24,20 @@
 				<div class="shortcut">
 					<ul class="fl">
 						<li class="f-item">品优购欢迎您！</li>
-						<li class="f-item">请<a href="{{route('login')}}" target="_blank">登录</a>　<span><a href="{{route('regist')}}" target="_blank">免费注册</a></span></li>
+						<?php echo session('username') ?>
+						@if(isset(session('username')))
+						<li class="f-item">
+							请<a href="{{route('Hlogin')}}" target="_blank">登录</a>
+							<span>
+								<a href="{{route('regist')}}" target="_blank">免费注册</a>
+							</span>
+						</li>
+						@else if
+						<li class="f-item">您好！用户XXX　
+							<span>
+								<a href="{{route('regist')}}" target="_blank">退出</a>
+							</span>
+						</li>
 					</ul>
 					<ul class="fr">
 						<li class="f-item">我的订单</li>

@@ -50,7 +50,7 @@
 							@endif
 								<div class="input-prepend">
 									<span class="add-on loginname"></span>
-									<input type="text" name="uname" placeholder="用户名/手机号" class="span2 input-xfat">
+									<input type="text" name="uname" placeholder="用户名/手机号" value="" class="span2 input-xfat">
 									<!-- @if($errors->has('uname')) class="error" @endif -->
 									<!-- @if($errors->has('uname'))
 									<p class="error">
@@ -60,7 +60,7 @@
 								</div>
 								<div class="input-prepend">
 									<span class="add-on loginpwd"></span>
-									<input type="password" name="password" placeholder="请输入密码" class="span2 input-xfat">
+									<input type="password" name="password" value="" placeholder="请输入密码" class="span2 input-xfat">
 									<!-- @if($errors->has('password')) class="error" @endif -->
 									<!-- @if($errors->has('password'))
 									<p class="error">

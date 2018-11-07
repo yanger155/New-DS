@@ -122,7 +122,7 @@ class BrandsController extends Controller
 
 
 
-
+    // 品牌查询
     public function brand_search(Request $req)
     {
         // 得到表单项
