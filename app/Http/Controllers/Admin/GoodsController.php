@@ -72,7 +72,7 @@ class GoodsController extends Controller
         );
 
         // 添加属性表----------------------------
-        dd($req->attr_name,$req->attr_value);
+        // dd($req->attr_name,$req->attr_value);
         foreach($req->attr_name as $k=>$v)
         {
             // DB::table('goods_attribute')->insertGetId([
@@ -129,11 +129,92 @@ class GoodsController extends Controller
 
 
 
-    public function update($id)
+    public function update(Request $req,$id)
     {
+        // dd($req->all());
+        if($req->cat1 == null)
+        {
+            return "请选择分类";
+        }else if($req->cat2 == null)
+        {
+            $cat_id = $req->cat1;
+        }
+        else if($req->cat3 == null)
+        {
+            $cat_id = $req->cat2;
+        }
+        else
+        {
+            $cat_id = $req->cat3;
+        }
 
+        $category = DB::table('goods_category')->where('id','=',$cat_id)->first();
+        $brand = DB::table('goods_brand')->where('id','=',$req->brand_id)->first();
+        // 修改商品表
+        Goods::where('id', $id)
+              ->update(['name' => $req->name],
+                       ['price' => $req->price],
+                       ['status' => $req->status],
+                       ['introduce' => $req->introduce],
+                       ['brand_name' => $brand->brand_name],
+                       ['category_name' => $category->category_name]);
+        // 修改属性表
+        foreach($req->attr_name as $k=>$v)
+        {
+            Goods_attr::where('goods_id', $id)
+                        ->update(['name' => $req->attr_name[$k]],
+                                 ['value' => $req->attr_value[$k]]);
+        }
 
+        // 修改图片表
+        // $img = DB::table('goods_image')->where('goods_id',$id)->value('url');
+        $count = DB::table('goods_image')->where('goods_id',$id)->count();
+        // dd($count);
+        if(!$count)
+        {
+            // 如果原先的图片不存在就插入新的图片
+                foreach($req->image as $k=>$v)
+                {
+                    if($req->has('image') && $v->isValid())
+                    {
+                        $date = date('Y-m-d');
+                        $path = $v->store('/goods/'.$date);
+                        $url = '/uploads/'.$path;
+                        // echo $url;
+                    }
+                    DB::table('goods_image')->insert(
+                        ['url' => $url, 'goods_id' => $id]
+                    );  
+                }
+        }
+        else
+        {  
+            // 如果原先存有图片就删除原有图片然后更新
+            $img = DB::table('goods_image')->where('goods_id',$id)->get();
+            foreach($img as $m)
+            {
+                // dd('public'.$m->url);
+                @unlink(base_path('public'.$m->url));
+            }
 
+            // 这里必须要有图片的上传，如果没有，图片将会被删掉
+            Goods_img::where('goods_id',$id)->delete();
+
+            
+            foreach($req->image as $k=>$v)
+            {
+                if($req->has('image') && $v->isValid())
+                {
+                    $date = date('Y-m-d');
+                    $path = $v->store('/goods/'.$date);
+                    $url = '/uploads/'.$path;
+                }
+                Goods_img::where('goods_id', $id)
+                            ->insert(['url' => $url, 'goods_id' => $id]);  
+            }
+        }
+        return redirect('/goods_charge');
+       
     }
 
 

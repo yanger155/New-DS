@@ -28,8 +28,9 @@
 </head>
 
 <body>
-    <form action="/goods_charge" method="post" enctype="multipart/form-data">
+    <form action="/goods_charge/{{$data3->id}}" method="post" enctype="multipart/form-data">
     @csrf
+    {{method_field('PUT')}}
         <h4>基本信息:</h4>
         <hr>
             <table width="100%">
